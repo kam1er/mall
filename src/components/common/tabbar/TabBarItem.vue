@@ -11,7 +11,7 @@ export default {
   props:{
     path:String,
     activeColor:{
-      default:"red",
+      default:"#FD6E36",
       type:String
     }
   },

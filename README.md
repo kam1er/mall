@@ -33,3 +33,11 @@ store:放置全局资源
 2.引用两个css文件(normalize/base)
 
 3.配置路径别名(vue.config.js)以及代码风格(.editorconfig)
+
+4.引入Tabbar 配置路由
+
+5.navbar组件
+
+6.封装网络模块 request.js
+
+7.请求首页数据 并展示 (轮播图,首页推荐) 网络请求都在Home界面 向子组件传递数据
