@@ -1,9 +1,20 @@
 <template>
-  <h2>分类</h2>
+  
 </template>
 <script>
-  export default{
-    name:"Category"
+import BScroll from "better-scroll";
+export default {
+  name: "Category",
+  data() {
+    return {
+      scroll: null
+    };
+  },
+  mounted() {
+    
   }
+};
 </script>
-<style scoped></style>
+<style scoped>
+
+</style>

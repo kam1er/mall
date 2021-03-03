@@ -1,6 +1,10 @@
 <template>
-  <div class="goods">
-    <goods-list-item :goodsItem="item" v-for="(item, index) in goods" :key="index" />
+  <div class="good-list">
+    <goods-list-item
+      :goodsItem="item"
+      v-for="(item, index) in goods"
+      :key="index"
+    />
   </div>
 </template>
 <script>
@@ -20,4 +24,12 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.good-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: var(--color-background);
+  padding: 2px;
+}
+</style>

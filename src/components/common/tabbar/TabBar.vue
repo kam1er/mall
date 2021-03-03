@@ -16,5 +16,6 @@ export default {
     bottom: 0;
     right: 0;
     background-color: #f6f6f6;
+    z-index: 10;
   }
 </style>

@@ -11,8 +11,8 @@
       <div slot="item-text">分类</div>
     </tab-bar-item>
     <tab-bar-item path="/cart" activeColor="#FD6E36">
-      <img src="@/assets/img/tabbar/cart.svg" slot="item-icon" />
-      <img src="@/assets/img/tabbar/cart_active.svg" slot="item-icon-active" />
+      <img src="@/assets/img/tabbar/shopcart.svg" slot="item-icon" />
+      <img src="@/assets/img/tabbar/shopcart_active.svg" slot="item-icon-active" />
       <div slot="item-text">购物车</div>
     </tab-bar-item>
     <tab-bar-item path="/profile" activeColor="#FD6E36">
