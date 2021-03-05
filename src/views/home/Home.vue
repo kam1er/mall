@@ -3,7 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroller class="content">
+    <scroller
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      :pull-up-load="true"
+      @scroll="contentScroll"
+      @pullingUp="loadMore"
+    >
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <feature-view></feature-view>
@@ -14,6 +21,11 @@
       ></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroller>
+    <!-- 监听组件原生事件时,必须加上修饰符native -->
+    <back-top
+      @click.native="backClick"
+      v-show="isShowBackTop < -900 ? true : false"
+    />
   </div>
 </template>
 <script>
@@ -24,6 +36,7 @@ import FeatureView from "@/views/home/childComps/FeatureView";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 import Scroller from "@/components/common/scroller/Scroller";
+import BackTop from "@/components/content/backTop/BackTop";
 import { getHomeMultidata, getHomeGoods } from "@/network/home";
 
 export default {
@@ -35,7 +48,8 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroller
+    Scroller,
+    BackTop
   },
   computed: {
     showGoods() {
@@ -51,7 +65,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: "pop"
+      currentType: "pop",
+      isShowBackTop: 0
     };
   },
   created() {
@@ -67,7 +82,9 @@ export default {
     /*
      *事件监听相关
      */
-
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0, 300);
+    },
     tabClick(index) {
       console.log(index);
       switch (index) {
@@ -81,6 +98,12 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    contentScroll(position) {
+      this.isShowBackTop = position.y;
+    },
+    loadMore() {
+      console.log("上拉加载更多");
     },
     /*
      * 网络请求相关
@@ -96,7 +119,6 @@ export default {
       getHomeGoods(type, page).then(res => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page = res.data.page;
-        console.log(this.goods[type]);
       });
     }
   }
@@ -122,10 +144,10 @@ export default {
   top: 44px;
   z-index: 9;
 }
-.content{
-  position:fixed;
+.content {
+  position: fixed;
   top: 44px;
-  left:0;
+  left: 0;
   right: 0;
   bottom: 49px;
   /* height:571px */
